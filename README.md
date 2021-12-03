@@ -40,4 +40,4 @@ After the completion of this step, multiple subdirectories will be created, each
 
 Upon completion of each folder’s TRACE run* the data can be summed by utilizing the “Load_All_Results.m” script which has no input arguments. This outputs a file “AllDataByIgHV.mat” which contains a nested cell structure with the variable name “AllFinalResults” that contains all the data for each subfolder, grouped by IGHV sequence. 
 
-*Note: TRACE is a computationally intensive script and reuires a long runtime. On average, each IgHV analysis takes 1 day to 1 week. **Running in parallel is highly recommended**
+*Note: TRACE is a computationally intensive script and requires a long runtime. On average, each IgHV analysis takes 1 day to 1 week. **Running in parallel is highly recommended**
