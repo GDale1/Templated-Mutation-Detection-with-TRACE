@@ -10,15 +10,20 @@ Included in these scripts are several auxiliary scripts that correctly format fi
 Within each subdirectory, the script “AutomatedAnalysisTRACE.m” can be run. The script will perform the TRACE pipeline and return an output file named “FinalCleanedResults.mat” that contains information of the subsequences that underwent a templated mutation event, the template used, and associated information on each. 
 Data from each subdirectory can then be loaded into a single file, using the “Load_All_Results.m” script. This outputs a file “AllDataByIgHV.mat” which contains a nested cell structure that contains all the data for each subfolder, grouped by IGHV sequence. 
 
+## Configuring BlastDB
+
+The main workhorse of the TRACE script is the BLAST algorithm. Given the number of BLAST searches necessary for a TRACE run, BLAST should be run locally. Comprehensive instructions for installing a local copy of BLAST can be found at https://www.ncbi.nlm.nih.gov/books/NBK279690/. In brief, a local copy of the hg38 human genomic sequences was downloaded and placed into a single fasta file. This fasta file was then used to create a local BLAST database used in subsequent studies. A fully configured copy of the BlastDB used in our studies can be found within the complete repository at https://zenodo.org/record/5759792#.Yaz-5dDMKUk.
+
 ## How to run TRACE:
 
 Before running the TRACE pipeline, the IMGT output file “2_IMGT-gapped-nt-sequences.txt” must be converted to a .xlsx (Microsoft Excel) file format. 
-*Note: the .txt file can be imported to Microsoft Excel and subsequently saved as .xlsx. See the example located in the Test Dataset folder.
+*Note: the .txt file can be imported to Microsoft Excel and subsequently saved as .xlsx. See the example located within the complete repository at https://zenodo.org/record/5759792#.Yaz-5dDMKUk.
+
 Next, use the script “TRACE_IMGT_Formating.m” which has the following input arguments: “ExcelFile”, “ReferenceFasta”, and “Clean_InputHandle”. The “ExcelFile” argument should be the name of the .xlsx formatted IMGT output file. Generally, this is “2_IMGT-gapped-nt-sequences.xlsx”. The “ReferenceFasta” argument should reference the included fasta file “Human_IgHV_Reference_total.fasta” which includes all the human IGHV reference sequences used by IMGT. The “Clean_InputHandle” argument is the file extension for fasta input. Should be made to be '*.fas'.
 
 After the completion of this step, multiple subdirectories will be created, each containing a fasta for a respective IGHV. Within each folder, the script “AutomatedAnalysisTRACE.m” should be run. Input arguments for this script are listed below:
 
-•	InputFileHandle - File extension for fasta input. Usually '*.fas', '*.fa', or '*.fasta'. "*" required by MATLAB and serves as a wildcard. 
+•	InputFileHandle - File extension for fasta input. Usually '.fas', '.fa', or '.fasta'. An asterisk is required before the file extention and serves as a wildcard. 
 
 •	InRange - the Motif size to be used in the TRACE pipeline. As configured in the paper this value is 38.
 
@@ -40,4 +45,4 @@ After the completion of this step, multiple subdirectories will be created, each
 
 Upon completion of each folder’s TRACE run* the data can be summed by utilizing the “Load_All_Results.m” script which has no input arguments. This outputs a file “AllDataByIgHV.mat” which contains a nested cell structure with the variable name “AllFinalResults” that contains all the data for each subfolder, grouped by IGHV sequence. 
 
-*Note: TRACE is a computationally intensive script and requires a long runtime. On average, each IgHV analysis takes 1 day to 1 week. **Running in parallel is highly recommended**
+*Note: TRACE is a computationally-intensive script and requires a long runtime. On average, each IgHV analysis takes 1 day to 1 week. **Running in parallel is highly recommended**
